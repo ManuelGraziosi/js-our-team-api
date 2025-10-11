@@ -12,11 +12,23 @@ axios.get("https://boolean-teachers.github.io/mock/api/members/")
     .then((resp) => {
         console.log(resp.data);
         const teamMembers = resp.data;
-        let teamMembersHtmlGrid = "";
-        for (let i = 0; i < teamMembers.length; i++) {
-            const curMember = teamMembers[i];
-            const { name, role, email, img } = curMember;
-            teamMembersHtmlGrid += `
+
+        gridRowElem.innerHTML = htmlGridGeneration(teamMembers);
+    })
+
+// minor optimization: function creation to generate the card
+/**
+ * 
+ * @param {Array} apiMembersArray 
+ * @returns {String}
+ */
+function htmlGridGeneration(apiMembersArray) {
+
+    let htmlGridInString = "";
+    for (let i = 0; i < apiMembersArray.length; i++) {
+        const curMember = apiMembersArray[i];
+        const { name, role, email, img } = curMember;
+        htmlGridInString += `
           <div class="col-12 col-md-6 col-lg-4">
               <div class="card mb-3">
                   <img src="${img}"
@@ -31,7 +43,7 @@ axios.get("https://boolean-teachers.github.io/mock/api/members/")
               </div>
           </div>
           `;
-        }
-        gridRowElem.innerHTML = teamMembersHtmlGrid;
-    })
+    }
 
+    return htmlGridInString
+}
