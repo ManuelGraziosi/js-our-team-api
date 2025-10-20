@@ -16,6 +16,7 @@ axios.get("https://boolean-teachers.github.io/mock/api/members/")
         gridRowElem.innerHTML = htmlGridGeneration(teamMembers);
     })
 
+
 // minor optimization: function creation to generate the card
 /**
  * 
